@@ -42,8 +42,11 @@ export function Footer() {
           ))}
         </FooterColumn>
       </Container>
+      <div className="display outline-text pointer-events-none select-none overflow-hidden whitespace-nowrap text-center text-[18vw] leading-[0.8] [--outline-color:rgb(255_255_255/0.12)]" aria-hidden>
+        GEARFORCE
+      </div>
       <div className="border-t border-white/10 py-5 text-center text-xs text-silver">
-        © {new Date().getFullYear()} GearForce. All rights reserved. Policies are drafts pending owner approval.
+        © {new Date().getFullYear()} GearForce. All rights reserved. Academic demo: no real payments. Policies are drafts pending owner approval.
       </div>
     </footer>
   );

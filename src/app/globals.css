@@ -80,6 +80,36 @@
   dialog.drawer::backdrop {
     background: rgb(0 0 0 / 0.6);
   }
+
+  /* Outlined display type — the "ghost" half of editorial headlines */
+  .outline-text {
+    color: transparent;
+    -webkit-text-stroke: 1.5px var(--outline-color, var(--color-arctic));
+  }
+  /* Angled panel corners (racing-livery cut) */
+  .clip-cut {
+    clip-path: polygon(0 0, calc(100% - 22px) 0, 100% 22px, 100% 100%, 0 100%);
+  }
+  .clip-slash {
+    clip-path: polygon(0 0, 100% 0, 100% calc(100% - 36px), 0 100%);
+  }
+  /* Carbon-weave texture for photo placeholders and panels */
+  .carbon {
+    background-color: var(--color-graphite-deep);
+    background-image:
+      linear-gradient(135deg, rgb(255 255 255 / 0.05) 25%, transparent 25%),
+      linear-gradient(225deg, rgb(255 255 255 / 0.05) 25%, transparent 25%),
+      linear-gradient(45deg, rgb(255 255 255 / 0.03) 25%, transparent 25%),
+      linear-gradient(315deg, rgb(255 255 255 / 0.03) 25%, var(--color-graphite-deep) 25%);
+    background-position: 6px 0, 6px 0, 0 0, 0 0;
+    background-size: 12px 12px;
+  }
+  .hide-scrollbar {
+    scrollbar-width: none;
+  }
+  .hide-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
 }
 
 @keyframes streak {
@@ -94,4 +124,45 @@
 }
 .animate-streak {
   animation: streak 0.9s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+}
+
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+.animate-marquee {
+  animation: marquee 38s linear infinite;
+}
+
+/* Tachometer needle: revs up, settles in the upper range */
+@keyframes needle-sweep {
+  0% {
+    transform: rotate(0deg);
+  }
+  55% {
+    transform: rotate(232deg);
+  }
+  72% {
+    transform: rotate(206deg);
+  }
+  100% {
+    transform: rotate(214deg);
+  }
+}
+.needle {
+  transform-origin: 200px 200px;
+  animation: needle-sweep 2.6s cubic-bezier(0.2, 0.8, 0.2, 1) 0.3s both;
+}
+
+@keyframes slash-in {
+  from {
+    transform: translateX(-110%) skewX(-20deg);
+  }
+  to {
+    transform: translateX(0) skewX(-20deg);
+  }
 }

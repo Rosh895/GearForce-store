@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { Inter, Rajdhani } from "next/font/google";
 import { Footer } from "@/components/layout/Footer";
+import { DemoBar } from "@/components/layout/DemoBar";
 import { Header } from "@/components/layout/Header";
 import { Providers } from "@/components/layout/Providers";
 import { getCartCatalogue } from "@/lib/products";
@@ -34,6 +35,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html lang="en-IN" className={`${rajdhani.variable} ${inter.variable}`}>
       <body className="flex min-h-screen flex-col">
         <Providers catalogue={getCartCatalogue()}>
+          <DemoBar />
           <Header />
           <main id="main" className="flex-1">
             {children}

@@ -28,8 +28,8 @@ export function Header() {
       </a>
       <div className="mx-auto flex h-16 max-w-7xl items-center gap-4 px-4 sm:h-[72px] sm:px-6 lg:px-8">
         <Logo priority />
-        <nav aria-label="Primary" className="ml-6 hidden flex-1 xl:block">
-          <ul className="flex items-center gap-5">
+        <nav aria-label="Primary" className="ml-4 hidden flex-1 xl:block">
+          <ul className="flex items-center gap-4 2xl:gap-6">
             {NAV_LINKS.map((l) => {
               const active = l.href === "/" ? pathname === "/" : pathname.startsWith(l.href);
               return (
@@ -37,7 +37,7 @@ export function Header() {
                   <Link
                     href={l.href}
                     aria-current={active ? "page" : undefined}
-                    className={`font-heading text-sm font-semibold uppercase tracking-[0.12em] transition-colors hover:text-racing ${active ? "text-racing" : "text-arctic"}`}
+                    className={`whitespace-nowrap font-heading text-[13px] font-semibold uppercase tracking-[0.08em] transition-colors hover:text-racing 2xl:text-sm 2xl:tracking-[0.12em] ${active ? "text-racing" : "text-arctic"}`}
                   >
                     {l.label}
                   </Link>
@@ -47,7 +47,7 @@ export function Header() {
           </ul>
         </nav>
         <div className="ml-auto flex items-center gap-2">
-          <SearchForm className="hidden w-52 md:flex" />
+          <SearchForm className="hidden w-40 md:flex 2xl:w-52" />
           <CartLink />
           <button
             type="button"

@@ -43,6 +43,18 @@ tests/            expected-catalogue.ts is a *second, independent* copy of the W
 - **Cart** stores only `{productId, quantity}` in `localStorage`; prices and availability are re-derived from the live catalogue on every render. It is a shopping convenience, not stock management.
 - **Images.** No product photos were supplied, so cards show an honest "Photo coming soon" placeholder. Drop real photos in `public/products/<sku-lowercase>/1.jpg` (SKU-less product: `public/products/<slug>/`); they are picked up automatically at build time.
 
+## Design system (v2 redesign)
+
+Art direction: racing livery — angled cuts, red slash, checker, speed lines, carbon texture, oversized italic + outlined type.
+
+- **Hero:** animated SVG tachometer (`components/home/Tachometer.tsx`) as the centrepiece. If a licensed photo is placed at `public/images/hero.jpg`, it replaces the dial automatically.
+- **Product visuals:** there is **no verified product photography in the repo**, so cards show an on-brand carbon placeholder built from the GearForce mark ("Photo coming soon"). Real photos in `public/products/<sku>/` replace it automatically — nothing is invented.
+- **Home:** hero → category ticker → bento category grid → ride-setup teaser → featured scroll-snap row → brand story.
+- **Ride Setup:** three-phase configurator (style → one step per gear slot → review) in `components/ride-setup/RideSetup.tsx`; picks live in `data/ride-setups.ts`.
+- **Product page:** dark buy panel, gallery, accordion details, mobile sticky buy bar.
+- **Demo status:** a persistent "Academic demo" bar, footer note and checkout disabled state; no payments exist.
+- **Performance/a11y:** transform/opacity-only animation, CSS ticker, `prefers-reduced-motion` respected globally, focus moved to each configurator step heading.
+
 ## Catalogue notes
 
 - 48 entries; the Wix placeholder `0001 "I'm a Product"` is kept in the audit but `publishStatus: hidden_pending_confirmation` — **47 are published**.

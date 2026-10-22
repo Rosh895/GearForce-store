@@ -4,6 +4,7 @@ import { notFound } from "next/navigation";
 import { AddToCartPanel } from "@/components/product/AddToCartPanel";
 import { AvailabilityBadge } from "@/components/product/AvailabilityBadge";
 import { PriceTag } from "@/components/product/PriceTag";
+import { ProductDetails } from "@/components/product/ProductDetails";
 import { ProductGallery } from "@/components/product/ProductGallery";
 import { ProductGrid } from "@/components/product/ProductGrid";
 import { Container } from "@/components/ui/Container";
@@ -57,56 +58,54 @@ export default async function ProductPage({ params }: { params: Params }) {
   };
 
   return (
-    <div className="bg-arctic text-midnight">
+    <div className="pb-24 lg:pb-0">
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd).replace(/</g, "\\u003c") }} />
-      <Container className="py-8">
-        <nav aria-label="Breadcrumb" className="mb-6 text-sm text-ink-muted">
-          <Link href="/shop" className="hover:text-racing">Shop</Link> / <Link href={`/category/${category.id}`} className="hover:text-racing">{category.label}</Link> / <span aria-current="page">{product.name}</span>
-        </nav>
 
-        <div className="grid gap-10 lg:grid-cols-2">
-          <ProductGallery images={product.images} />
-          <div className="space-y-6">
-            <div>
-              {product.brand && <p className="text-sm font-semibold uppercase tracking-[0.14em] text-ink-muted">{product.brand}</p>}
-              <h1 className="display mt-1 text-3xl sm:text-5xl">{product.name}</h1>
-              {!product.nameComplete && (
-                <p className="mt-2 text-sm text-ink-muted">Full product name is being confirmed.</p>
-              )}
-            </div>
-            <PriceTag price={product.sellingPrice} originalPrice={product.originalPrice} size="lg" />
-            <div className="flex flex-wrap items-center gap-3">
-              <AvailabilityBadge status={product.availabilityStatus} />
-              <span className="text-sm text-ink-muted">SKU: {product.sku ?? "being verified"}</span>
-            </div>
-            <AddToCartPanel product={product} />
+      <section className="relative overflow-hidden bg-midnight">
+        <div className="speed-lines absolute inset-0 opacity-60" aria-hidden />
+        <Container className="relative py-8 sm:py-12">
+          <nav aria-label="Breadcrumb" className="mb-6 text-sm text-silver">
+            <Link href="/shop" className="hover:text-racing">Shop</Link> / <Link href={`/category/${category.id}`} className="hover:text-racing">{category.label}</Link> / <span aria-current="page" className="text-arctic">{product.name}</span>
+          </nav>
 
-            <section aria-labelledby="desc" className="border-t border-black/10 pt-6">
-              <h2 id="desc" className="font-heading text-lg font-bold uppercase tracking-[0.1em]">Description</h2>
-              <p className="mt-2 text-ink-muted">{product.description ?? "A product description has not been added yet."}</p>
-            </section>
-            <section aria-labelledby="specs" className="border-t border-black/10 pt-6">
-              <h2 id="specs" className="font-heading text-lg font-bold uppercase tracking-[0.1em]">Specifications</h2>
-              {product.specifications.length ? (
-                <dl className="mt-2 grid grid-cols-[auto_1fr] gap-x-6 gap-y-1 text-sm">
-                  {product.specifications.map((s) => (
-                    <div key={s.label} className="contents"><dt className="font-semibold">{s.label}</dt><dd>{s.value}</dd></div>
-                  ))}
-                </dl>
-              ) : (
-                <p className="mt-2 text-ink-muted">Specifications will be added once they have been verified. Please <Link href="/contact" className="font-semibold text-racing underline">contact us</Link> for details.</p>
-              )}
-            </section>
+          <div className="grid gap-8 lg:grid-cols-[1.1fr_1fr] lg:gap-14">
+            <ProductGallery images={product.images} />
+            <div className="space-y-6 lg:sticky lg:top-28 lg:self-start">
+              <div>
+                <p className="eyebrow flex items-center gap-3">
+                  <span className="h-px w-8 bg-racing" aria-hidden />
+                  {product.brand ?? category.label}
+                </p>
+                <h1 className="display mt-3 text-[clamp(2.25rem,5.5vw,4.5rem)] leading-[0.95]">{product.name}</h1>
+                {!product.nameComplete && <p className="mt-2 text-sm text-silver">Full product name is being confirmed.</p>}
+              </div>
+              <PriceTag price={product.sellingPrice} originalPrice={product.originalPrice} size="lg" onDark />
+              <div className="flex flex-wrap items-center gap-3">
+                <AvailabilityBadge status={product.availabilityStatus} onDark />
+                <span className="font-heading text-sm font-bold tracking-[0.18em] text-silver">SKU {product.sku ?? "BEING VERIFIED"}</span>
+              </div>
+              <AddToCartPanel product={product} />
+              <p className="border-t border-white/10 pt-4 text-xs text-silver">Academic demo — checkout is disabled and nothing is charged.</p>
+            </div>
           </div>
-        </div>
+        </Container>
+      </section>
 
-        {related.length > 0 && (
-          <section aria-labelledby="related" className="mt-16">
-            <h2 id="related" className="display mb-6 text-3xl">Related products</h2>
-            <ProductGrid products={related} />
-          </section>
-        )}
-      </Container>
+      <div className="bg-arctic text-midnight">
+        <Container className="py-12 sm:py-16">
+          <div className="grid gap-10 lg:grid-cols-[1fr_1.2fr]">
+            <h2 className="display text-4xl sm:text-5xl">The <span className="text-racing">details</span></h2>
+            <ProductDetails product={product} />
+          </div>
+
+          {related.length > 0 && (
+            <section aria-labelledby="related" className="mt-16 border-t border-black/10 pt-12">
+              <h2 id="related" className="display mb-6 text-3xl sm:text-4xl">More from {category.label}</h2>
+              <ProductGrid products={related} />
+            </section>
+          )}
+        </Container>
+      </div>
     </div>
   );
 }
