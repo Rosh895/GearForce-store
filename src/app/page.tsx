@@ -1,6 +1,7 @@
 import { BrandStory } from "@/components/home/BrandStory";
 import { CategoryGrid } from "@/components/home/CategoryGrid";
 import { FeaturedProducts } from "@/components/home/FeaturedProducts";
+import { RideSetupTeaser } from "@/components/home/RideSetupTeaser";
 import { Hero } from "@/components/home/Hero";
 import { findHeroImage } from "@/lib/product-images";
 import { getFeaturedProducts, getPublishedProducts } from "@/lib/products";
@@ -13,6 +14,7 @@ export default function HomePage() {
     <>
       <Hero heroImage={findHeroImage()} />
       <CategoryGrid counts={counts} />
+      <RideSetupTeaser />
       <FeaturedProducts products={getFeaturedProducts()} />
       <BrandStory />
     </>

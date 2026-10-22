@@ -18,6 +18,7 @@ export function Footer() {
         </div>
         <FooterColumn title="Shop">
           <li><Link href="/shop">Shop All</Link></li>
+          <li><Link href="/ride-setup">Ride Setup</Link></li>
           {CATEGORIES.map((c) => (
             <li key={c.id}><Link href={`/category/${c.id}`}>{c.label}</Link></li>
           ))}
